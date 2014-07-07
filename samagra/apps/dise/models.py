@@ -89,4 +89,42 @@ class Schools(models.Model):
     UpperPrimary_residential_choice = models.IntegerField(choices=TYPE_RESIDENTIAL_CHOICES, null=True)
     Secondary_residential_choice = models.IntegerField(choices=TYPE_RESIDENTIAL_CHOICES, null=True)
     HSSC__residential_choice = models.IntegerField(choices=TYPE_RESIDENTIAL_CHOICES, null=True)
+    MEDIUM_INSTRUCTION_CHOICES = (
+            (1, 'English'),
+            (2, 'Hindi'),
+            (3, 'Malayalam'),
+            (4, 'Tamil'),
+            (5, 'Assamese'),
+            (6, 'Bengali'),
+            (7, 'Gujarati'),
+            (8, 'Kannada'),
+            (9, 'Kashmiri'),
+            (10, 'Konkani'),
+            (11, 'Manipuri'),
+            (12, 'Marathi'),
+            (13, 'Nepali'),
+            (14, 'Sanskrit'),
+            (15, 'Sindhi'),
+            (17, 'Telugu'),
+            (18, 'Urdu'),
+            (20, 'Bodo'),
+            (21, 'Mising'),
+            (22, 'Dogri'),
+            (23, 'Khasi'),
+            (24, 'Garo'),
+            (25, 'Mizo'),
+            (26, 'Bhutia'),
+            (27, 'Leptcha'),
+            (28, 'Limboo'),
+            (29, 'French'),
+            (30, 'Odia'),
+            (31, 'Panjabi'),
+            (32, 'Others'),
+            )
+
+    primary_medium = models.IntegerField(choices=MEDIUM_INSTRUCTION_CHOICES))
+    secondary_medium = models.IntegerField(choices=MEDIUM_INSTRUCTION_CHOICES))
+    tertiary_medium = models.IntegerField(choices=MEDIUM_INSTRUCTION_CHOICES))
+    quartery_medium = models.IntegerField(choices=MEDIUM_INSTRUCTION_CHOICES))
+
 
