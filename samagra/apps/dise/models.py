@@ -147,3 +147,12 @@ class Schools(models.Model):
     is_anganwadi = models.BooleanField()
     anganwadi_total_students = models.IntegerField(default=0)
     anganwadi_total_workers = models.IntegerField(default=0)
+
+
+class AccademicYear_inspections(models.Moodel):
+    school= models.ForeignKey(Schools)
+    year = models.IntegerField(('year'), max_length=4, choices=YEAR_CHOICES, default=datetime.datetime.now().year)
+    accademic_inspection = models.IntegerField(default=0)
+    visits_by_crc_coordinator = models.IntegerField(default=0)
+    visits_by_blocklevel_officer = models.IntegerField(default=0)
+
