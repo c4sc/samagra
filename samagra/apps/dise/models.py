@@ -156,3 +156,12 @@ class AccademicYear_inspections(models.Moodel):
     visits_by_crc_coordinator = models.IntegerField(default=0)
     visits_by_blocklevel_officer = models.IntegerField(default=0)
 
+class Financial_year_Schoolfunds(models.Model):
+    school= models.ForeignKey(Schools)
+    year = models.IntegerField(('year'), max_length=4, choices=YEAR_CHOICES, default=datetime.datetime.now().year)
+    SDG_receipt = models.FloatField(default=0)
+    SDG_expenditure = models.FloatField(default=0)
+    SMG_receipt = models.FloatField(default=0)
+    SMG_expenditure = models.FloatField(default=0)
+    teachers_receipt = models.FloatField(default=0)
+    teachers_expenditure = models.FloatField(default=0)
