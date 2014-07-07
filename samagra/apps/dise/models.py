@@ -121,7 +121,6 @@ class Schools(models.Model):
             (31, 'Panjabi'),
             (32, 'Others'),
             )
-
     primary_medium = models.IntegerField(choices=MEDIUM_INSTRUCTION_CHOICES))
     secondary_medium = models.IntegerField(choices=MEDIUM_INSTRUCTION_CHOICES))
     tertiary_medium = models.IntegerField(choices=MEDIUM_INSTRUCTION_CHOICES))
@@ -136,11 +135,15 @@ class Schools(models.Model):
             )
     secondary_affiliation_board = models.IntegerField(choices=AFFILIATION_BOARD_CHOICE)
     HSSC_affiliation_board = models.IntegerField(choices=AFFILIATION_BOARD_CHOICE)
-    lattitude_degree = models.IntegerField(max_length=3)
-    lattitude_minutes = models.IntegerField(max_length=3)
-    lattitude_seconds = models.IntegerField(max_length=3)
-    longitude_degree = models.IntegerField(max_length=3)
-    longitude_minutes = models.IntegerField(max_length=3)
-    longitude_seconds = models.IntegerField(max_length=3)
-
-
+    lattitude_degree = models.IntegerField(default=0)
+    lattitude_minutes = models.IntegerField(default=0)
+    lattitude_seconds = models.IntegerField(default=0)
+    longitude_degree = models.IntegerField(default=0)
+    longitude_minutes = models.IntegerField(default=0)
+    longitude_seconds = models.IntegerField(default=0)
+    is_preprimary = models.BooleanField()
+    preprimary_total_students = models.IntegerField(default=0)
+    preprimary_total_teachers = models.IntegerField(default=0)
+    is_anganwadi = models.BooleanField()
+    anganwadi_total_students = models.IntegerField(default=0)
+    anganwadi_total_workers = models.IntegerField(default=0)
