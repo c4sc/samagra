@@ -126,5 +126,21 @@ class Schools(models.Model):
     secondary_medium = models.IntegerField(choices=MEDIUM_INSTRUCTION_CHOICES))
     tertiary_medium = models.IntegerField(choices=MEDIUM_INSTRUCTION_CHOICES))
     quartery_medium = models.IntegerField(choices=MEDIUM_INSTRUCTION_CHOICES))
+    AFFILIATION_BOARD_CHOICE = (
+            (0,'Not applicable'),
+            (1,'CBSE'),
+            (2,'StateBoard'),
+            (3,'ICSE'),
+            (4,'International'),
+            (5,'Others'),
+            )
+    secondary_affiliation_board = models.IntegerField(choices=AFFILIATION_BOARD_CHOICE)
+    HSSC_affiliation_board = models.IntegerField(choices=AFFILIATION_BOARD_CHOICE)
+    lattitude_degree = models.IntegerField(max_length=3)
+    lattitude_minutes = models.IntegerField(max_length=3)
+    lattitude_seconds = models.IntegerField(max_length=3)
+    longitude_degree = models.IntegerField(max_length=3)
+    longitude_minutes = models.IntegerField(max_length=3)
+    longitude_seconds = models.IntegerField(max_length=3)
 
 
