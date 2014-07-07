@@ -76,3 +76,17 @@ class Schools(models.Model):
     year_upgrade_primary_to_HSSC = models.IntegerField(('year'), max_length=4, choices=YEAR_CHOICES, default=datetime.datetime.now().year)
     is_specialschool_CWSN = models.BooleanField()
     is_shift_school = models.BooleanField()
+    TYPE_RESIDENTAIL_CHOICES = (
+            (1, 'Ashram(Govt)'),
+            (2, 'Non Ashram (Govt)'),
+            (3, 'Private'),
+            (4, 'Others'),
+            (5, 'Kasturba gandhi Balika Vidhyalaya'),
+            (6, 'Model school'),
+            )
+    is_residential = models.BooleanField()
+    Primary_residential_choice = models.IntegerField(choices=TYPE_RESIDENTIAL_CHOICES, null=True)
+    UpperPrimary_residential_choice = models.IntegerField(choices=TYPE_RESIDENTIAL_CHOICES, null=True)
+    Secondary_residential_choice = models.IntegerField(choices=TYPE_RESIDENTIAL_CHOICES, null=True)
+    HSSC__residential_choice = models.IntegerField(choices=TYPE_RESIDENTIAL_CHOICES, null=True)
+
