@@ -165,3 +165,21 @@ class Financial_year_Schoolfunds(models.Model):
     SMG_expenditure = models.FloatField(default=0)
     teachers_receipt = models.FloatField(default=0)
     teachers_expenditure = models.FloatField(default=0)
+
+class staff_category(models.Model):
+    school= models.ForeignKey(Schools)
+    year = models.IntegerField(('year'), max_length=4, choices=YEAR_CHOICES, default=datetime.datetime.now().year)
+    regular_sanctioned_primary = models.IntegerField(default=0)
+    regular_sanctioned_up = models.IntegerField(default=0)
+    regular_sanctioned_secondary = models.IntegerField(default=0)
+    regular_sanctioned_hssc = models.IntegerField(default=0)
+    regular_inposition_primary = models.IntegerField(default=0)
+    regular_inposition_up = models.IntegerField(default=0)
+    regular_inposition_secondary = models.IntegerField(default=0)
+    regular_inposition_hssc = models.IntegerField(default=0)
+    contract_inposition_staff_primary = models.IntegerField(default=0)
+    contract_inposition_staff_up = models.IntegerField(default=0)
+    contract_inposition_staff_secondary = models.IntegerField(default=0)
+    contract_inposition_staff_hssc = models.IntegerField(default=0)
+    parttime_instructor_inposition_up = models.IntegerField(default=0)
+
