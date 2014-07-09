@@ -159,7 +159,8 @@ class School(models.Model):
     is_anganwadi = models.BooleanField()
     anganwadi_total_students = models.IntegerField(default=0)
     anganwadi_total_workers = models.IntegerField(default=0)
-
+    def __unicode__(self):
+        return self.name
 
 class AccademicYear_inspections(models.Model):
     school= models.ForeignKey(School)
