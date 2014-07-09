@@ -187,3 +187,9 @@ class Staff_category(models.Model):
     totalnumber = models.IntegerField(default=0)
 
 
+class School_instructional_days(models.Model):
+    school= models.ForeignKey(Schools)
+    year = models.IntegerField(('year'), max_length=4, choices=YEAR_CHOICES, default=datetime.datetime.now().year)
+    instructional_days = models.IntegerField(default=0)
+    school_hours = models.IntegerField(default=0)
+    teacher_hours = models.IntegerField(default=0)
