@@ -2,7 +2,7 @@ from django.db import models
 import datetime
 
 YEAR_CHOICES = []
-for r in range(2012, (datetime.datetime.now().year+1)):
+for r in range(2010, (datetime.datetime.now().year+3)):
     YEAR_CHOICES.append((r,r))
 
 CLASS_TYPE_CHOICE = (
@@ -11,8 +11,13 @@ CLASS_TYPE_CHOICE = (
    (3,'Secondary'),
    (4,'Higher secondary'),
                 )
+BOOLEAN_OPTIONS_CHOICE = (
+        (0,'Not applicable'),
+        (1,'Yes'),
+        (2,'No'),
+        )
 
-class Schools(models.Model):
+class School(models.Model):
     CATEGORY_CHOICES = (
                          (1, 'Primary only (1-5)'),
                          (2, 'Primary with UP (1-8)'),
@@ -74,16 +79,16 @@ class Schools(models.Model):
     distance_from_primary = models.CharField(max_length=7, blank=True, null=True)
     distance_from_upi = models.CharField(max_length=7, blank=True, null=True)
     is_weather_roads = models.BooleanField()
-    school_established_year = models.IntegerField(('year'), max_length=4, choices=YEAR_CHOICES, default=datetime.datetime.now().year)
-    elementry_recognition = models.IntegerField(('year'), max_length=4, choices=YEAR_CHOICES, default=datetime.datetime.now().year)
-    secondary_recognition = models.IntegerField(('year'), max_length=4, choices=YEAR_CHOICES, default=datetime.datetime.now().year)
-    hssc_recognition = models.IntegerField(('year'), max_length=4, choices=YEAR_CHOICES, default=datetime.datetime.now().year)
-    year_upgrade_primary_to_UP = models.IntegerField(('year'), max_length=4, choices=YEAR_CHOICES, default=datetime.datetime.now().year)
-    year_upgrade_primary_to_secondary = models.IntegerField(('year'), max_length=4, choices=YEAR_CHOICES, default=datetime.datetime.now().year)
-    year_upgrade_primary_to_HSSC = models.IntegerField(('year'), max_length=4, choices=YEAR_CHOICES, default=datetime.datetime.now().year)
+    school_established_year = models.IntegerField(('school established year'), max_length=4, choices=YEAR_CHOICES, default=datetime.datetime.now().year)
+    elementry_recognition = models.IntegerField(('elementry recognition'), max_length=4, choices=YEAR_CHOICES, default=datetime.datetime.now().year)
+    secondary_recognition = models.IntegerField(('secondary recognition'), max_length=4, choices=YEAR_CHOICES, default=datetime.datetime.now().year)
+    hssc_recognition = models.IntegerField(('hssc recognition'), max_length=4, choices=YEAR_CHOICES, default=datetime.datetime.now().year)
+    year_upgrade_primary_to_UP = models.IntegerField(('year of upgrade primary to UP'), max_length=4, choices=YEAR_CHOICES, default=datetime.datetime.now().year)
+    year_upgrade_primary_to_secondary = models.IntegerField(('year of upgrade primary to Secondary'), max_length=4, choices=YEAR_CHOICES, default=datetime.datetime.now().year)
+    year_upgrade_primary_to_HSSC = models.IntegerField(('year of upgrade Primary to HSSC'), max_length=4, choices=YEAR_CHOICES, default=datetime.datetime.now().year)
     is_specialschool_CWSN = models.BooleanField()
     is_shift_school = models.BooleanField()
-    TYPE_RESIDENTAIL_CHOICES = (
+    TYPE_RESIDENTIAL_CHOICES = (
             (1, 'Ashram(Govt)'),
             (2, 'Non Ashram (Govt)'),
             (3, 'Private'),
@@ -128,10 +133,10 @@ class Schools(models.Model):
             (31, 'Panjabi'),
             (32, 'Others'),
             )
-    primary_medium = models.IntegerField(choices=MEDIUM_INSTRUCTION_CHOICES))
-    secondary_medium = models.IntegerField(choices=MEDIUM_INSTRUCTION_CHOICES))
-    tertiary_medium = models.IntegerField(choices=MEDIUM_INSTRUCTION_CHOICES))
-    quartery_medium = models.IntegerField(choices=MEDIUM_INSTRUCTION_CHOICES))
+    primary_medium = models.IntegerField(choices=MEDIUM_INSTRUCTION_CHOICES)
+    secondary_medium = models.IntegerField(choices=MEDIUM_INSTRUCTION_CHOICES)
+    tertiary_medium = models.IntegerField(choices=MEDIUM_INSTRUCTION_CHOICES)
+    quartery_medium = models.IntegerField(choices=MEDIUM_INSTRUCTION_CHOICES)
     AFFILIATION_BOARD_CHOICE = (
             (0,'Not applicable'),
             (1,'CBSE'),
@@ -156,15 +161,15 @@ class Schools(models.Model):
     anganwadi_total_workers = models.IntegerField(default=0)
 
 
-class AccademicYear_inspections(models.Moodel):
-    school= models.ForeignKey(Schools)
+class AccademicYear_inspections(models.Model):
+    school= models.ForeignKey(School)
     year = models.IntegerField(('year'), max_length=4, choices=YEAR_CHOICES, default=datetime.datetime.now().year)
     accademic_inspection = models.IntegerField(default=0)
     visits_by_crc_coordinator = models.IntegerField(default=0)
     visits_by_blocklevel_officer = models.IntegerField(default=0)
 
 class Financial_year_Schoolfunds(models.Model):
-    school= models.ForeignKey(Schools)
+    school= models.ForeignKey(School)
     year = models.IntegerField(('year'), max_length=4, choices=YEAR_CHOICES, default=datetime.datetime.now().year)
     SDG_receipt = models.FloatField(default=0)
     SDG_expenditure = models.FloatField(default=0)
@@ -174,7 +179,7 @@ class Financial_year_Schoolfunds(models.Model):
     teachers_expenditure = models.FloatField(default=0)
 
 class Staff_category(models.Model):
-    school= models.ForeignKey(Schools)
+    school= models.ForeignKey(School)
     year = models.IntegerField(('year'), max_length=4, choices=YEAR_CHOICES, default=datetime.datetime.now().year)
     sanctioned = models.IntegerField(choices=CLASS_TYPE_CHOICE)
     inposition = models.IntegerField(choices=CLASS_TYPE_CHOICE)
@@ -187,9 +192,14 @@ class Staff_category(models.Model):
     totalnumber = models.IntegerField(default=0)
 
 
-class School_instructional_days(models.Model):
-    school= models.ForeignKey(Schools)
+class School_puticulars_instructional_days(models.Model):
+    school= models.ForeignKey(School)
     year = models.IntegerField(('year'), max_length=4, choices=YEAR_CHOICES, default=datetime.datetime.now().year)
     instructional_days = models.IntegerField(default=0)
     school_hours = models.IntegerField(default=0)
     teacher_hours = models.IntegerField(default=0)
+    is_cce = models.BooleanField()
+    is_cumulative_maintained = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICE)
+    is_cumulative_record_shared = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICE)
+    is_smc = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICE)
+
