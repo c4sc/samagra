@@ -168,18 +168,22 @@ class AccademicYear_inspections(models.Model):
     accademic_inspection = models.IntegerField(default=0)
     visits_by_crc_coordinator = models.IntegerField(default=0)
     visits_by_blocklevel_officer = models.IntegerField(default=0)
+    class Meta:
+        unique_together = (("school", "year"),)
     def __unicode__(self):
        return u"{0} - {1}".format(self.school.name,self.year)
 
 class Financial_year_schoolfund(models.Model):
     school= models.ForeignKey(School)
-    year = models.IntegerField(('year'), max_length=4, choices=YEAR_CHOICES, default=datetime.datetime.now().year)
+    year = models.IntegerField(('Accademic year'), max_length=4, choices=YEAR_CHOICES, default=datetime.datetime.now().year)
     SDG_receipt = models.FloatField(default=0)
     SDG_expenditure = models.FloatField(default=0)
     SMG_receipt = models.FloatField(default=0)
     SMG_expenditure = models.FloatField(default=0)
     teachers_receipt = models.FloatField(default=0)
     teachers_expenditure = models.FloatField(default=0)
+    class Meta:
+        unique_together = (("school", "year"),)
     def __unicode__(self):
        return u"{0} - {1}".format(self.school.name,self.year)
 
@@ -199,6 +203,8 @@ class Staff_category(models.Model):
             )
     teacher_type = models.IntegerField(choices=TEACHER_TYPE_CHOICE)
     totalnumber = models.IntegerField(default=0)
+    class Meta:
+        unique_together = (("school", "year","category","session","teacher_type"),)
     def __unicode__(self):
        return u"{0} - {1} - {2} - {3} - {4}".format(self.school.name,self.year,self.category,self.session,self.teacher_type)
 
@@ -215,4 +221,3 @@ class School_puticulars_instructional_days(models.Model):
     is_smc = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICE)
     def __unicode__(self):
         return u"{0} - {1}".format(self.school.name,self.year)
-
