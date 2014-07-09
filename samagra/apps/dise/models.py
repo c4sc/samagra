@@ -5,6 +5,13 @@ YEAR_CHOICES = []
 for r in range(2012, (datetime.datetime.now().year+1)):
     YEAR_CHOICES.append((r,r))
 
+CLASS_TYPE_CHOICE = (
+   (1,'Primary'),
+   (2,'Upper Primary'),
+   (3,'Secondary'),
+   (4,'Higher secondary'),
+                )
+
 class Schools(models.Model):
     CATEGORY_CHOICES = (
                          (1, 'Primary only (1-5)'),
@@ -166,20 +173,17 @@ class Financial_year_Schoolfunds(models.Model):
     teachers_receipt = models.FloatField(default=0)
     teachers_expenditure = models.FloatField(default=0)
 
-class staff_category(models.Model):
+class Staff_category(models.Model):
     school= models.ForeignKey(Schools)
     year = models.IntegerField(('year'), max_length=4, choices=YEAR_CHOICES, default=datetime.datetime.now().year)
-    regular_sanctioned_primary = models.IntegerField(default=0)
-    regular_sanctioned_up = models.IntegerField(default=0)
-    regular_sanctioned_secondary = models.IntegerField(default=0)
-    regular_sanctioned_hssc = models.IntegerField(default=0)
-    regular_inposition_primary = models.IntegerField(default=0)
-    regular_inposition_up = models.IntegerField(default=0)
-    regular_inposition_secondary = models.IntegerField(default=0)
-    regular_inposition_hssc = models.IntegerField(default=0)
-    contract_inposition_staff_primary = models.IntegerField(default=0)
-    contract_inposition_staff_up = models.IntegerField(default=0)
-    contract_inposition_staff_secondary = models.IntegerField(default=0)
-    contract_inposition_staff_hssc = models.IntegerField(default=0)
-    parttime_instructor_inposition_up = models.IntegerField(default=0)
+    sanctioned = models.IntegerField(choices=CLASS_TYPE_CHOICE)
+    inposition = models.IntegerField(choices=CLASS_TYPE_CHOICE)
+    TEACHER_TYPE_CHOICE = (
+            (1,'Regular Teachers'),
+            (2,'Contract Teachers'),
+            (3,'Part-time instructor'),
+            )
+    teacher_type = models.IntegerField(choices=TEACHER_TYPE_CHOICE)
+    totalnumber = models.IntegerField(default=0)
+
 
