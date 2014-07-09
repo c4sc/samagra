@@ -164,12 +164,14 @@ class School(models.Model):
 
 class AccademicYear_inspections(models.Model):
     school= models.ForeignKey(School)
-    year = models.IntegerField(('year'), max_length=4, choices=YEAR_CHOICES, default=datetime.datetime.now().year)
+    year = models.IntegerField(('Accademic year'), max_length=4, choices=YEAR_CHOICES, default=datetime.datetime.now().year)
     accademic_inspection = models.IntegerField(default=0)
     visits_by_crc_coordinator = models.IntegerField(default=0)
     visits_by_blocklevel_officer = models.IntegerField(default=0)
+    def __unicode__(self):
+       return "%s" % self.year
 
-class Financial_year_Schoolfunds(models.Model):
+class Financial_year_schoolfund(models.Model):
     school= models.ForeignKey(School)
     year = models.IntegerField(('year'), max_length=4, choices=YEAR_CHOICES, default=datetime.datetime.now().year)
     SDG_receipt = models.FloatField(default=0)
@@ -178,6 +180,8 @@ class Financial_year_Schoolfunds(models.Model):
     SMG_expenditure = models.FloatField(default=0)
     teachers_receipt = models.FloatField(default=0)
     teachers_expenditure = models.FloatField(default=0)
+    def __unicode__(self):
+       return "%s" % self.year
 
 class Staff_category(models.Model):
     school= models.ForeignKey(School)
