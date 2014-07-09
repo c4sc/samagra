@@ -169,7 +169,7 @@ class AccademicYear_inspections(models.Model):
     visits_by_crc_coordinator = models.IntegerField(default=0)
     visits_by_blocklevel_officer = models.IntegerField(default=0)
     def __unicode__(self):
-       return "%s" % self.year
+       return u"{0} - {1}".format(self.school.name,self.year)
 
 class Financial_year_schoolfund(models.Model):
     school= models.ForeignKey(School)
@@ -181,13 +181,17 @@ class Financial_year_schoolfund(models.Model):
     teachers_receipt = models.FloatField(default=0)
     teachers_expenditure = models.FloatField(default=0)
     def __unicode__(self):
-       return "%s" % self.year
+       return u"{0} - {1}".format(self.school.name,self.year)
 
 class Staff_category(models.Model):
     school= models.ForeignKey(School)
     year = models.IntegerField(('year'), max_length=4, choices=YEAR_CHOICES, default=datetime.datetime.now().year)
-    sanctioned = models.IntegerField(choices=CLASS_TYPE_CHOICE)
-    inposition = models.IntegerField(choices=CLASS_TYPE_CHOICE)
+    POST_TYPE_CHOICE = (
+            (1,'Sanctioned post'),
+            (2,'In position'),
+            )
+    category = models.IntegerField(choices=POST_TYPE_CHOICE)
+    session = models.IntegerField(choices=CLASS_TYPE_CHOICE)
     TEACHER_TYPE_CHOICE = (
             (1,'Regular Teachers'),
             (2,'Contract Teachers'),
@@ -195,6 +199,8 @@ class Staff_category(models.Model):
             )
     teacher_type = models.IntegerField(choices=TEACHER_TYPE_CHOICE)
     totalnumber = models.IntegerField(default=0)
+    def __unicode__(self):
+       return u"{0} - {1} - {2} - {3} - {4}".format(self.school.name,self.year,self.category,self.session,self.teacher_type)
 
 
 class School_puticulars_instructional_days(models.Model):
@@ -207,4 +213,6 @@ class School_puticulars_instructional_days(models.Model):
     is_cumulative_maintained = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICE)
     is_cumulative_record_shared = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICE)
     is_smc = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICE)
+    def __unicode__(self):
+        return u"{0} - {1}".format(self.school.name,self.year)
 
