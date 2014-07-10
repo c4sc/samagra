@@ -16,6 +16,11 @@ BOOLEAN_OPTIONS_CHOICE = (
         (1,'Yes'),
         (2,'No'),
         )
+COMMON_OPTIONS_CHOICE = (
+        (1,'Male'),
+        (2,'Female'),
+        )
+
 
 class School(models.Model):
     CATEGORY_CHOICES = (
@@ -218,6 +223,16 @@ class School_puticulars_instructional_days(models.Model):
     is_cce = models.BooleanField()
     is_cumulative_maintained = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICE)
     is_cumulative_record_shared = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICE)
-    is_smc = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICE)
     def __unicode__(self):
         return u"{0} - {1}".format(self.school.name,self.year)
+class School_management_commitee(models.Model):
+    school = models.ForeignKey(School)
+    year = models.IntegerField(('Accademic year'), max_length=4, choices=YEAR_CHOICES, default=datetime.datetime.now().year)
+    is_smc = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICE)
+    sex = models.IntegerField(choices=COMMON_OPTIONS_CHOICE)
+    total_member_in_smc = models.IntegerField(default=0)
+    parents = models.IntegerField(default=0)
+    local_authority = models.IntegerField(default=0)
+    class Meta:
+        unique_together = (("sex","total_member_in_smc","parents","local_authority"),)
+
