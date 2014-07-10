@@ -225,14 +225,63 @@ class School_puticulars_instructional_days(models.Model):
     is_cumulative_record_shared = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICE)
     def __unicode__(self):
         return u"{0} - {1}".format(self.school.name,self.year)
+
 class School_management_commitee(models.Model):
     school = models.ForeignKey(School)
     year = models.IntegerField(('Accademic year'), max_length=4, choices=YEAR_CHOICES, default=datetime.datetime.now().year)
     is_smc = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICE)
-    sex = models.IntegerField(choices=COMMON_OPTIONS_CHOICE)
-    total_member_in_smc = models.IntegerField(default=0)
-    parents = models.IntegerField(default=0)
-    local_authority = models.IntegerField(default=0)
-    class Meta:
-        unique_together = (("sex","total_member_in_smc","parents","local_authority"),)
+    male_total_member_in_smc = models.IntegerField(default=0)
+    maleparents = models.IntegerField(default=0)
+    male_local_authority = models.IntegerField(default=0)
+    female_total_member_in_smc = models.IntegerField(default=0)
+    femaleparents = models.IntegerField(default=0)
+    female_local_authority = models.IntegerField(default=0)
+    number_of_smc_meating = models.IntegerField(default=0)
+    is_smc_prepare_sdp = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICE)
+    is_statebank_exist = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICE)
+    bank_name = models.CharField(max_length=128)
+    bank_branch = models.CharField(max_length=128)
+    bank_acc_no = models.CharField(max_length=128)
+    bank_acc_name = models.CharField(max_length=128)
+    bank_ifsc_code = models.CharField(max_length=128)
+    is_child_enrolled_training = models.BooleanField()
+    male_num_children = models.IntegerField(default=0)
+    female_num_children = models.IntegerField(default=0)
+    male_children_completed = models.IntegerField(default=0)
+    female_children_completed = models.IntegerField(default=0)
+    TRAINING_CONDUCTED_CHOICE = (
+            (1,"School teachers"),
+            (2,"Special engaged teachers"),
+            (3,"Both"),
+            (4,"NGO"),
+            (5,"Others"),
+            (6,"None"),
+            )
+    conducted_by = models.IntegerField(choices=TRAINING_CONDUCTED_CHOICE)
+    TRAINING_CONDUCTED_IN = (
+            (1,"School prenises"),
+            (2,"Other than school premises"),
+            (3,"Both"),
+            )
+    training_contected_in = models.IntegerField(choices=TRAINING_CONTECTED_IN)
+    TRAINING_BEING_CONTECTED = (
+            (1,"Residential"),
+            (2,"Non-residential"),
+            (3,"Both"),
+            )
+    training_contectd = models.IntegerField(choices=TRAINING_BEING_CONTECTED)
+
+class Accademic_purticular(models.Model):
+    school = models.ForeignKey(School)
+    year = models.IntegerField(('Accademic year'), max_length=4,choices=YEAR_CHOICES, default=datetime.datetime.now().year)
+    is_textbook_received = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICE)
+    when_received_textbook = model.IntegerField(default=0) #need to change to options year and month
+    primary_freebook_received = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICE)
+    uprimary_freebook_received = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICE)
+    is_primary_tle_available = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICE)
+    is_uprimary_tle_available = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICE)
+    is_primary_playmaterial_available = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICE)
+    is_uprimary_playmaterial_available = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICE)
+
+
 
