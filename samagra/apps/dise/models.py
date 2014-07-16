@@ -285,6 +285,17 @@ class Accademic_purticular(models.Model):
     is_uprimary_tle_available = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICE)
     is_primary_playmaterial_available = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICE)
     is_uprimary_playmaterial_available = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICE)
+    number_of_smdc_held = models.IntegerField(default=0)
+    is_smdc_held_school_improvement_plan = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICE)
+    is_seperate_bank_account = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICE)
+    bank_name = models.CharField(max_length=128)
+    branch_name =models.CharField(max_length=128)
+    account_number = models.CharField(max_length=128)
+    Account_name = models.CharField(max_length=128)
+    IFSC_code = models.CharField(max_length=128)
+    is_sbc = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICES)
+    is_PTA = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICES)
+    total_pta_meeting = models.IntegerField(default=0)
     class Meta:
         unique_together = (("school", "year"),)
 
@@ -307,6 +318,6 @@ class Accademic_purticular(models.Model):
     chairperson  = models.IntegerField()
     class Meta:
         unique_together = (("school","year","catagory"),)
-
+class
 
 
