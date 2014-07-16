@@ -285,6 +285,28 @@ class Accademic_purticular(models.Model):
     is_uprimary_tle_available = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICE)
     is_primary_playmaterial_available = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICE)
     is_uprimary_playmaterial_available = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICE)
+    class Meta:
+        unique_together = (("school", "year"),)
+
+ class Accademic_purticular(models.Model):
+    school = models.ForeignKey(School)
+    year = models.IntegerField(('Accademic year'), max_length=4,choices=YEAR_CHOICES, default=datetime.datetime.now().year)
+    is_smc_smdc_same = models.BooleanField()
+    catagory = models.IntegerField(choices=COMMON_OPTIONS_CHOICE)
+    total_members = models.IntegerField()
+    local_representatives = models.IntegerField()
+    from_backward_community = models.IntegerField()
+    womengroup = models.IntegerField()
+    sc_st = models.IntegerField()
+    DEO = models.IntegerField()
+    AAD = models.IntegerField()
+    sub_expert = models.IntegerField()
+    teachers = models.IntegerField()
+    vice_principal = models.IntegerField()
+    principal  = models.IntegerField()
+    chairperson  = models.IntegerField()
+    class Meta:
+        unique_together = (("school","year","catagory"),)
 
 
 
