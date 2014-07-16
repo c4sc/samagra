@@ -450,6 +450,32 @@ class Rooms_availability(models.Model):
         unique_together = (("school","year"),)
 
 
+class Rooms_availability(models.Model):
+    school = models.ForeignKey(School)
+    year = models.IntegerField(('Accademic year'), max_length=4,choices=YEAR_CHOICES, default=datetime.datetime.now().year)
+    SUBJECT_TYPE_CHOICES = (
+            (1,"Physics"),
+            (2,"Chemistry"),
+            (3,"Biology"),
+            (4,"Computer"),
+            (5,"Mathematics"),
+            (6,"Language"),
+            (7,"Geography"),
+            (8,"Homescience"),
+            (9,"Psychology"),
+            )
+    subject = models.IntegerField(choices=SUBJECT_TYPE_CHOICES)
+    is_seperate_room = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICES)
+    CONDITION_CHOICE = (
+            (1,"Not Applicable"),
+            (2,"Fully equipped"),
+            (3,"Partially equipped"),
+            (4,"Not equipped"),
+            (5,"Not Available"),
+            )
+    present_condition = models.IntegerField(choices=CONDITION_CHOICE)
+    class Meta:
+        unique_together = (("school","year","subject"),)
 
 
 
