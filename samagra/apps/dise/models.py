@@ -446,6 +446,13 @@ class Rooms_availability(models.Model):
     is_staff_quarter = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICES)
     is_science_lab = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICES)
     is_library_room = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICES)
+    is_audio_visual_equipment = models.integerField(choices=BOOLEAN_OPTIONS_CHOICES)
+    is_projector_equipment = models.integerField(choices=BOOLEAN_OPTIONS_CHOICES)
+    is_fire_extinguisher_equipment = models.integerField(choices=BOOLEAN_OPTIONS_CHOICES)
+    is_internet_connection_equipment = models.integerField(choices=BOOLEAN_OPTIONS_CHOICES)
+    is_rainwater_harvesting = models.integerField(choices=BOOLEAN_OPTIONS_CHOICES)
+    is_science_kit = models.integerField(choices=BOOLEAN_OPTIONS_CHOICES)
+    is_maths_kit = models.integerField(choices=BOOLEAN_OPTIONS_CHOICES)
     class Meta:
         unique_together = (("school","year"),)
 
