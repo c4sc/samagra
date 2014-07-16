@@ -434,6 +434,20 @@ class Hostalfacility(models.Model):
     class Meta:
         unique_together = (("school","year"),)
 
+class Rooms_availability(models.Model):
+    school = models.ForeignKey(School)
+    year = models.IntegerField(('Accademic year'), max_length=4,choices=YEAR_CHOICES, default=datetime.datetime.now().year)
+    is_room_for_head = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICES)
+    is_room_for_girls = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICES)
+    is_staffroom = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICES)
+    is_ict_lab = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICES)
+    is_computer_room = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICES)
+    is_cocurricular_room = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICES)
+    is_staff_quarter = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICES)
+    is_science_lab = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICES)
+    is_library_room = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICES)
+    class Meta:
+        unique_together = (("school","year"),)
 
 
 
