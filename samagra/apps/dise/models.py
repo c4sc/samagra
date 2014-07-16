@@ -484,5 +484,38 @@ class Rooms_availability(models.Model):
     class Meta:
         unique_together = (("school","year","subject"),)
 
-
-
+class Mid_day_meal(models.Model):
+    school = models.ForeignKey(School)
+    year = models.IntegerField(('Accademic year'), max_length=4,choices=YEAR_CHOICES, default=datetime.datetime.now().year)
+    SCHOOL_TYPE = (
+            (1,"Government"),
+            (2,"Govt. Aided"),
+            )
+    school_type = models.IntegerField(choices=SCHOOL_TYPE)
+    STATUS_CHOICES = (
+            (1,"Not Applicable"),
+            (2,"Not Provided"),
+            (3,"Provided & prepared in school premises"),
+            (4,"Provided but not prepared in school premises"),
+            )
+    status = models.IntegerField(choices=STATUS_CHOICES)
+    ROOM_STATUS = (
+            (1,"Not applicable"),
+            (2,"Available"),
+            (3,"Not available"),
+            (4,"Under Construction"),
+            (5,"ClassRoom used as kitchen"),
+            )
+    status_kitchen_shed = models.IntegerField(choices=ROOM_STATUS)
+    SOURCE_OF_MDM = (
+            (1,"Nearby school"),
+            (2,"NGO"),
+            (3,"Self Help Group"),
+            (4,"PTA/MPTA"),
+            (5,"Others"),
+            (6,"Gram panchayat"),
+            (7,"Central kitchen"),
+            )
+    souce_of_mdm = models.IntegerField(choices=SOURCE_OF_MDM)
+    class Meta:
+        unique_together = (("school","year"),)
