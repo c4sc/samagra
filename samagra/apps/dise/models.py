@@ -422,3 +422,20 @@ class Fecility_learning(models.Model):
     is_handheld_ramp_available = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICES)
     class Meta:
         unique_together = (("school","year"),)
+
+class Hostalfacility(models.Model):
+    school = models.ForeignKey(School)
+    year = models.IntegerField(('Accademic year'), max_length=4,choices=YEAR_CHOICES, default=datetime.datetime.now().year)
+    is_hostel = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICES)
+    is_boys_hostel = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICES)
+    total_boys = models.IntegerField(default=0)
+    is_girls_hostel = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICES)
+    total_girls = models.IntegerField(default=0)
+    class Meta:
+        unique_together = (("school","year"),)
+
+
+
+
+
+
