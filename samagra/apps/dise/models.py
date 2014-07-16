@@ -408,3 +408,17 @@ class physical__fecility(models.Model):
     is_land_available_for_playground = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICES)
     class Meta:
         unique_together = (("school","year","catagory"),)
+
+class Fecility_learning(models.Model):
+    school = models.ForeignKey(School)
+    year = models.IntegerField(('Accademic year'), max_length=4,choices=YEAR_CHOICES, default=datetime.datetime.now().year)
+    is_computer_lab = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICES)
+    total_computer_available = models.IntegerField(default=0)
+    total_computer_functional = models.IntegerField(default=0)
+    is_computer_aided_learning = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICES)
+    is_medical_checkup_conducted = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICES)
+    is_ramp_needed_for_disabled_children = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICES)
+    is_ramp_available = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICES)
+    is_handheld_ramp_available = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICES)
+    class Meta:
+        unique_together = (("school","year"),)
