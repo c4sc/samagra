@@ -21,6 +21,20 @@ COMMON_OPTIONS_CHOICE = (
         (2,'Female'),
         )
 
+CLASS_CHOICES = (
+    (1,"I"),
+    (2,"II"),
+    (3,"III"),
+    (4,"IV"),
+    (5,"V"),
+    (6,"VI"),
+    (7,"VII"),
+    (8,"VIII"),
+    (9,"IX"),
+    (10,"X"),
+    (11,"XI"),
+    (12,"XII"),
+    )
 
 class School(models.Model):
     CATEGORY_CHOICES = (
@@ -170,6 +184,16 @@ class School(models.Model):
 class AccademicYear_inspections(models.Model):
     school= models.ForeignKey(School)
     year = models.IntegerField(('Accademic year'), max_length=4, choices=YEAR_CHOICES, default=datetime.datetime.now().year)
+    SCHOOL_BUILDING = (
+            (1,"Private"),
+            (2,"Rented"),
+            (3,"Government"),
+            (4,"Gov: school in a rent free building"),
+            (5,"No building"),
+            (5,"Dilapidated"),
+            (6,"Under Construction"),
+            )
+    status_school_building = models.IntegerField(choices=SCHOOL_BUILDING)
     accademic_inspection = models.IntegerField(default=0)
     visits_by_crc_coordinator = models.IntegerField(default=0)
     visits_by_blocklevel_officer = models.IntegerField(default=0)
@@ -318,6 +342,69 @@ class Accademic_purticular(models.Model):
     chairperson  = models.IntegerField()
     class Meta:
         unique_together = (("school","year","catagory"),)
-class
 
+class physical_class_fecility(models.Model):
+    school = models.ForeignKey(School)
+    year = models.IntegerField(('Accademic year'), max_length=4,choices=YEAR_CHOICES, default=datetime.datetime.now().year)
+    class_room = models.IntegerField(choices=CLASS_CHOICES)
+    total_class_room_used = models.IntegerField(default=0)
+    TYPE_OF_BUILDING = (
+            (1,"Pucca"),
+            (2,"Partially Pucca"),
+            (3,"Kuchcha"),
+            (4,"Tent"),
+            )
+    building_block = models.IntegerField(choices=TYPE_OF_BUILDING)
+    under_construction = models.IntegerField(default=0)
+    furniture_availability = models.IntegerField(default=0)
+    total_other_rooms = models.IntegerField(default=0)
+    under_construction = models.IntegerField(default=0)
+    in_good_condition = models.IntegerField(default=0)
+    in_need_miner_repair = models.IntegerField(default=0)
+    in_need_major_repair = models.IntegerField(default=0)
 
+class physical__fecility(models.Model):
+    school = models.ForeignKey(School)
+    year = models.IntegerField(('Accademic year'), max_length=4,choices=YEAR_CHOICES, default=datetime.datetime.now().year)
+    is_construction_land_available = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICE)
+    is_seperate_room_for_head = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICES)
+    boys_toilets_number = models.IntegerField(default=0)
+    girls_toilets_number = models.IntegerField(default=0)
+    boys_toilet_functional = models.IntegerField(default=0)
+    girls_toilet_functional = models.IntegerField(default=0)
+    boys_toilets_water_available = models.IntegerField(default=0)
+    girls_toilet_water_available = models.IntegerField(default=0)
+    boys_urinal_available = models.IntegerField(default=0)
+    girls_urinal_available = models.IntegerField(default=0)
+    is_handwashing_facility_near_toilet = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICES)
+    is_childrenfriendly-toilets = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICES)
+    DRINKING_WATER_CHOICES = (
+            (1,"Hand Pump"),
+            (2,"Well"),
+            (3,"Tap water"),
+            (4,"Others"),
+            (5,"None"),
+            )
+    main_source_of_drinking_water = models.IntegerField(choices=DRINKING_WATER_CHOICES)
+    is_drinking_facility_functional = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICES)
+    is_electricity_connection_available = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICES)
+    BOUNDRY_OPTIONS_CHOICES = (
+            (0,"Not Applicable"),
+            (1,"Pucca"),
+            (2,"Pucca but broken"),
+            (3,"Barbed wire fencing"),
+            (4,"Hedges"),
+            (5,"No boundry wall"),
+            (6,"Others"),
+            (7,"Partial"),
+            (8,"Under Construction"),
+            )
+    type_boundry_well = models.IntegerField(choices=BOUNDRY_OPTIONS_CHOICES)
+    is_library = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICES)
+    total_books = models.integerField(default=0)
+    is_fulltime_librararian = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICES)
+    is_newspaper_subscribe = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICES)
+    is_playground = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICES)
+    is_land_available_for_playground = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICES)
+    class Meta:
+        unique_together = (("school","year","catagory"),)
