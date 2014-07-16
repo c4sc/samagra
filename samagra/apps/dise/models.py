@@ -217,12 +217,15 @@ class Staff_category(models.Model):
 class School_puticulars_instructional_days(models.Model):
     school= models.ForeignKey(School)
     year = models.IntegerField(('year'), max_length=4, choices=YEAR_CHOICES, default=datetime.datetime.now().year)
+    session = models.IntegerField(choices=CLASS_TYPE_CHOICE)
     instructional_days = models.IntegerField(default=0)
     school_hours = models.IntegerField(default=0)
     teacher_hours = models.IntegerField(default=0)
     is_cce = models.BooleanField()
     is_cumulative_maintained = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICE)
     is_cumulative_record_shared = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICE)
+    class Meta:
+        unique_together = (("school", "year","session"),)
     def __unicode__(self):
         return u"{0} - {1}".format(self.school.name,self.year)
 
