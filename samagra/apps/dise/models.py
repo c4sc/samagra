@@ -678,3 +678,14 @@ class Streams_in_school(models.Model):
     is_exist = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICES)
     def Meta:
         unique_together = (("school","year","std","stream","is_exist"),)
+
+class Enrolment_repeaters_bystream(models.Model):
+    school = models.ForeignKey(School)
+    year = models.IntegerField(('Accademic year'), max_length=4,choices=YEAR_CHOICES, default=datetime.datetime.now().year)
+    stream = models.IntegerField(choices=STREAM_OPTIONS_CHOICES)
+    class_list = models.IntegerField(choices=CLASS_OPTIONS_CHOICES)
+    social_category = models.IntegerField(choices=SOCIAL_OPTIONS_CHOICES)
+    gender = models.IntegerField(choices=GENDER_OPTIONS)
+    total = models.IntegerField(default=0)
+    def Meta:
+        unique_together = (("school","year","stream","social_category","class_list","social_category","gender"),)
