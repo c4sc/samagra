@@ -668,3 +668,13 @@ class Facility_provided_to_cwsn(models.Model):
     total = models.IntegerField(default=0)
     def Meta:
         unique_together = (("school","year","session","gender","facility_list"),)
+
+
+class Streams_in_school(models.Model):
+    school = models.ForeignKey(School)
+    year = models.IntegerField(('Accademic year'), max_length=4,choices=YEAR_CHOICES, default=datetime.datetime.now().year)
+    std = models.IntegerField(choices=STANDARD_OPTIONS_CHOICES)
+    stream = models.IntegerField(choices=STREAM_OPTIONS_CHOICES)
+    is_exist = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICES)
+    def Meta:
+        unique_together = (("school","year","std","stream","is_exist"),)
