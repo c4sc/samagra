@@ -548,4 +548,10 @@ class Teachers_and_instructors(models.Model):
     is_trained = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICES)
     state_defined_variable = models.CharField(max_length=128)
 
+class Primary_admission(models.Model):
+    school = models.ForeignKey(School)
+    year = models.IntegerField(('Accademic year'), max_length=4,choices=YEAR_CHOICES, default=datetime.datetime.now().year)
+    age = models.IntegerField(choices=AGE_CHOICES_PRIMARY)
+    boys = models.IntegerField(default=0)
+    girls = models.IntegerField(default=0)
 
