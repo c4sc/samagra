@@ -638,4 +638,15 @@ class Current_academic_repeaters_minority(models.Model):
     def Meta:
         unique_together = (("school","year","std","gender","category"),)
 
+class Facilities_provided(models.Model):
+    school = models.ForeignKey(School)
+    year = models.IntegerField(('Accademic year'), max_length=4,choices=YEAR_CHOICES, default=datetime.datetime.now().year)
+    std = models.IntegerField(choices=STANDARD_OPTIONS_CHOICES)
+    student_category = models.IntegerField(choices=CATEGORY_OPTIONS_CHOICES)
+    gender = models.IntegerField(choices=GENDER_OPTIONS)
+    facility_list = models.IntegerField(choices=FACILITY_OPTIONS)
+    total = models.IntegerField(default=0)
+    def Meta:
+        unique_together = (("school","year","stusent_category","gender","facility_list"),)
+
 
