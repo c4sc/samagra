@@ -519,3 +519,33 @@ class Mid_day_meal(models.Model):
     souce_of_mdm = models.IntegerField(choices=SOURCE_OF_MDM)
     class Meta:
         unique_together = (("school","year"),)
+
+class Teachers_and_instructors(models.Model):
+    teacher_code = models.IntegerField(default=0)
+    aadhar_pnr = models.CharField(max_length=128)
+    name = models.CharField(max_length=128)
+    gender = model.IntegerField(choices=COMMON_OPTIONS_CHOICE)
+    Dateofbirth = models.DateField()
+    socialcategory= model.IntegerField(choices=SOCIAL_CATEGORY)
+    type_teacher = models.IntegerField(choices=TEACHER_TYPES)
+    appoinment_nature =models.IntegerField(choices=APPOINMENT_NATURE)
+    joining_date = models.DateField()
+    academic = models.CharField(max_ength=256)
+    professional = models.CharField(max_ength=256)
+    classes_taught = models.IntegerField(choices=CLASSES_TAUGHT_CHOICES)
+    appointed_subject = models.IntegerField(choices=APPOINTED_SUBJECT)
+    main_subject1 = models.IntegerField(choices=MAIN_SUBJECT_CHOICES)
+    total_days_brc = models.IntegerField(default=0)
+    total_days_crc = models.IntegerField(default=0)
+    total_days_diet = models.IntegerField(default=0)
+    total_days_others = models.IntegerField(default=0)
+    days_non_teaching = models.IntegerField(default=0)
+    maths_science_studied_upto = models.IntegerField(default=0)
+    english_studied_upto = models.IntegerField(default=0)
+    socialstudies_upto = models.IntegerField(default=0)
+    working_current_school_since_year = models.IntegerField(default=0)
+    type_disability = models.IntegerField(choices=DISABILITY_TYPE)
+    is_trained = models.IntegerField(choices=BOOLEAN_OPTIONS_CHOICES)
+    state_defined_variable = models.CharField(max_length=128)
+
+
