@@ -555,3 +555,17 @@ class Primary_admission(models.Model):
     boys = models.IntegerField(default=0)
     girls = models.IntegerField(default=0)
 
+class Preschool_experience(models.Model):
+    school = models.ForeignKey(School)
+    year = models.IntegerField(('Accademic year'), max_length=4,choices=YEAR_CHOICES, default=datetime.datetime.now().year)
+    total_admitted_boys = models.IntegerField(default=0)
+    total_admitted_girls = models.IntegerField(default=0)
+    same_school_girls = models.IntegerField(default=0)
+    sames_chool_boys = models.IntegerField(default=0)
+    another_school_girls = models.IntegerField(default=0)
+    another_school_boys = models.IntegerField(default=0)
+    anganvadi_ecce_centre_girls = models.IntegerField(default=0)
+    anganvadi_ecce_centre_boys = models.IntegerField(default=0)
+    def Meta:
+        unique_together = (("school","year"),)
+
