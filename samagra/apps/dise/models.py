@@ -579,3 +579,10 @@ class Enrolment_socialcategory(models.Model):
     def Meta:
         unique_together = (("school","year","category","std","gender"),)
 
+class Enrolment_minority(models.Model):
+    school = models.ForeignKey(School)
+    year = models.IntegerField(('Accademic year'), max_length=4,choices=YEAR_CHOICES, default=datetime.datetime.now().year)
+    category = models.IntegerField(choices=MINORITY_OPTIONS_CHOICE)
+    std = models.IntegerField(choices=STANDARD_OPTIONS_CHOICES)
+    gender = models.IntegerField(choices=GENDER_OPTIONS)
+    total = models.IntegerField(default=0)
