@@ -659,3 +659,12 @@ class Children_with_special_need(models.Model):
     def Meta:
         unique_together = (("school","year","std","gender","disability_list"),)
 
+class Facility_provided_to_cwsn(models.Model):
+    school = models.ForeignKey(School)
+    year = models.IntegerField(('Accademic year'), max_length=4,choices=YEAR_CHOICES, default=datetime.datetime.now().year)
+    session = models.IntegerField(choices=SESSION_OPTIONS_CHOICES)
+    gender = models.IntegerField(choices=GENDER_OPTIONS)
+    facility_list = models.IntegerField(choices=FACILITY_OPTIONS_LIST)
+    total = models.IntegerField(default=0)
+    def Meta:
+        unique_together = (("school","year","session","gender","facility_list"),)
