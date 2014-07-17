@@ -603,7 +603,7 @@ class Current_academic_bymedium(models.Model):
     year = models.IntegerField(('Accademic year'), max_length=4,choices=YEAR_CHOICES, default=datetime.datetime.now().year)
     std = models.IntegerField(choices=STANDARD_OPTIONS_CHOICES)
     gender = models.IntegerField(choices=GENDER_OPTIONS)
-    medium = models.IntegerField(choices=GENDER_OPTIONS)
+    medium = models.IntegerField(choices=MEDIUM_OPTIONS)
     total = models.IntegerField(default=0)
     def Meta:
         unique_together = (("school","year","std","gender","medium"),)
@@ -613,7 +613,7 @@ class Current_academic_bymedium(models.Model):
     year = models.IntegerField(('Accademic year'), max_length=4,choices=YEAR_CHOICES, default=datetime.datetime.now().year)
     std = models.IntegerField(choices=STANDARD_OPTIONS_CHOICES)
     gender = models.IntegerField(choices=GENDER_OPTIONS)
-    medium = models.IntegerField(choices=GENDER_OPTIONS)
+    medium = models.IntegerField(choices=MEDIUM_OPTIONS)
     total = models.IntegerField(default=0)
     def Meta:
         unique_together = (("school","year","std","gender","medium"),)
@@ -623,7 +623,17 @@ class Current_academic_repeaters(models.Model):
     year = models.IntegerField(('Accademic year'), max_length=4,choices=YEAR_CHOICES, default=datetime.datetime.now().year)
     std = models.IntegerField(choices=STANDARD_OPTIONS_CHOICES)
     gender = models.IntegerField(choices=GENDER_OPTIONS)
-    category = models.IntegerField(choices=GENDER_OPTIONS)
+    category = models.IntegerField(choices=CATEGORY_OPTIONS)
+    total = models.IntegerField(default=0)
+    def Meta:
+        unique_together = (("school","year","std","gender","category"),)
+
+class Current_academic_repeaters_minority(models.Model):
+    school = models.ForeignKey(School)
+    year = models.IntegerField(('Accademic year'), max_length=4,choices=YEAR_CHOICES, default=datetime.datetime.now().year)
+    std = models.IntegerField(choices=STANDARD_OPTIONS_CHOICES)
+    gender = models.IntegerField(choices=GENDER_OPTIONS)
+    minority = models.IntegerField(choices=MINORITY_OPTIONS)
     total = models.IntegerField(default=0)
     def Meta:
         unique_together = (("school","year","std","gender","category"),)
