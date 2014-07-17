@@ -576,4 +576,6 @@ class Enrolment_socialcategory(models.Model):
     std = models.IntegerField(choices=STANDARD_OPTIONS_CHOICES)
     gender = models.IntegerField(choices=GENDER_OPTIONS)
     total = models.IntegerField(default=0)
+    def Meta:
+        unique_together = (("school","year","category","std","gender"),)
 
