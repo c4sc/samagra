@@ -598,7 +598,7 @@ class Current_academic_byage(models.Model):
     def Meta:
         unique_together = (("school","year","std","gender"),)
 
-class Current_academic_byage(models.Model):
+class Current_academic_bymedium(models.Model):
     school = models.ForeignKey(School)
     year = models.IntegerField(('Accademic year'), max_length=4,choices=YEAR_CHOICES, default=datetime.datetime.now().year)
     std = models.IntegerField(choices=STANDARD_OPTIONS_CHOICES)
